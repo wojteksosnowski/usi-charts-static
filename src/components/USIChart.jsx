@@ -32,7 +32,7 @@ const USIStar = ({ style = {} }) => (
           <g transform="matrix(1.33333,0,0,0.294986,-1188.94,598.17)">
             <g transform="matrix(0.75,0,0,0.75,447.725,170.834)">
               <g transform="matrix(0.024,0,0,0.024,1624.38,641.241)">
-                <path d="M6820.02,1591.25C6820.02,1591.25 6820.12,1112.14 6820.12,1065.04C6820.11,1059.78 6823.6,1055.16 6828.65,1053.7C6841.17,1050.18 6870.83,1045.17 6938.22,1045.17C7005.63,1045.17 7035.28,1050.19 7047.8,1053.71C7052.86,1055.17 7056.33,1059.79 7056.33,1065.05L7056.36,1591.25L7556.89,1428.64C7561.9,1427.01 7567.38,1428.9 7570.33,1433.27C7577.53,1444.11 7591.43,1470.79 7612.21,1534.86C7633.02,1599.01 7637.43,1628.84 7637.97,1641.88C7638.15,1647.14 7634.82,1651.89 7629.82,1653.52C7579.1,1669.99 7287.12,1764.81 7129.43,1816.02L7438.94,2242.06C7441.79,2246.29 7441.61,2251.89 7438.45,2255.94C7430.37,2266.14 7409.28,2287.6 7354.78,2327.16C7300.19,2366.78 7273.18,2380.19 7260.95,2384.73C7256.65,2386.3 7251.91,2385.22 7248.7,2382.12L6938.22,1954.95L6627.75,2382.11C6627.6,2382.26 6627.44,2382.4 6627.28,2382.54C6624.1,2385.32 6619.59,2386.22 6615.49,2384.73C6603.26,2380.19 6576.26,2366.78 6521.67,2327.16C6467.16,2287.6 6446.08,2266.14 6437.99,2255.94C6434.75,2251.79 6434.65,2245.99 6437.75,2241.73L6746.97,1816.08C6549.76,1752 6293.55,1668.76 6246.57,1653.49C6246.49,1653.46 6246.41,1653.44 6246.33,1653.41C6241.46,1651.71 6238.25,1647.05 6238.42,1641.88C6238.93,1628.89 6243.35,1599.13 6264.23,1534.85C6285.29,1470.03 6299.26,1443.53 6306.4,1432.95C6309.25,1428.78 6314.51,1426.99 6319.3,1428.55L6820.02,1591.25Z" fill="currentColor" />
+                <path d="M6820.02,1591.25C6820.02,1591.25 6820.12,1112.14 6820.12,1065.04C6820.11,1059.78 6823.6,1055.16 6828.65,1053.7C6841.17,1050.18 6870.83,1045.17 6938.22,1045.17C7005.63,1045.17 7035.28,1050.19 7047.8,1053.71C7052.86,1055.17 7056.33,1059.79 7056.33,1065.05L7056.36,1591.25L7556.89,1428.64C7556.89,1428.64 7561.9,1427.01 7570.33,1433.27C7577.53,1444.11 7591.43,1470.79 7612.21,1534.86C7633.02,1599.01 7637.43,1628.84 7637.97,1641.88C7638.15,1647.14 7634.82,1651.89 7629.82,1653.52C7579.1,1669.99 7287.12,1764.81 7129.43,1816.02L7438.94,2242.06C7441.79,2246.29 7441.61,2251.89 7438.45,2255.94C7430.37,2266.14 7409.28,2287.6 7354.78,2327.16C7300.19,2366.78 7273.18,2380.19 7260.95,2384.73C7256.65,2386.3 7251.91,2385.22 7248.7,2382.12L6938.22,1954.95L6627.75,2382.11C6627.6,2382.26 6627.44,2382.4 6627.28,2382.54C6624.1,2385.32 6619.59,2386.22 6615.49,2384.73C6603.26,2380.19 6576.26,2366.78 6521.67,2327.16C6467.16,2287.6 6446.08,2266.14 6437.99,2255.94C6434.75,2251.79 6434.65,2245.99 6437.75,2241.73L6746.97,1816.08C6549.76,1752 6293.55,1668.76 6246.57,1653.49C6246.49,1653.46 6246.41,1653.44 6246.33,1653.41C6241.46,1651.71 6238.25,1647.05 6238.42,1641.88C6238.93,1628.89 6243.35,1599.13 6264.23,1534.85C6285.29,1470.03 6299.26,1443.53 6306.4,1432.95C6309.25,1428.78 6314.51,1426.99 6319.3,1428.55L6820.02,1591.25Z" fill="currentColor" />
               </g>
             </g>
           </g>
@@ -60,7 +60,7 @@ const USILabel = ({ label, color: boxColor, showColorBox = false, textColor }) =
   const labelStr = String(label);
   const isStar = labelStr.startsWith('usi-star-');
   const isZero = labelStr.startsWith('usi-zero-');
-  const digit = isStar ? labelStr.split('-').pop() : '';
+  const starsCount = isStar ? parseInt(labelStr.split('-').pop(), 10) : 0;
 
   const color = textColor || USI_THEME.colors.graphite;
 
@@ -74,8 +74,9 @@ const USILabel = ({ label, color: boxColor, showColorBox = false, textColor }) =
       )}
       {isStar && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
-          <USIStar style={{ color: color }} />
-          <span style={{ fontSize: '13px', fontWeight: 'bold', color: color }}>{digit}</span>
+          {Array.from({ length: starsCount }).map((_, i) => (
+            <USIStar key={i} style={{ color: color, width: '12px' }} />
+          ))}
         </div>
       )}
       {!isStar && !isZero && (
@@ -130,6 +131,108 @@ const CustomYAxisTick = (props) => {
   );
 };
 
+const CustomXAxisTick = (props) => {
+  const { x, y, payload, chartWidth, dataLength, premium } = props;
+  
+  const axisWidth = chartWidth || props.width || 0;
+  const columnWidth = (dataLength > 1 && axisWidth > 0) ? axisWidth / (dataLength - 1) : 0;
+  
+  const dx = premium ? -columnWidth / 2 : 0; 
+
+  return (
+    <g transform={`translate(${x},${y + 10})`}>
+      <text 
+        dx={dx}
+        y={0}
+        textAnchor="middle" 
+        fill={premium ? 'white' : USI_THEME.colors.graphite} 
+        style={{ 
+          fontSize: premium ? '10px' : '12px', 
+          fontFamily: 'Signika',
+          fontWeight: premium ? 600 : 400
+        }}
+      >
+        {payload ? payload.value : ''}
+      </text>
+    </g>
+  );
+};
+
+const CustomIndicatorLabel = (props) => {
+  const { x, y, index, data, lvl, labels, premium, viewBox, chartWidth: explicitWidth, chartHeight: explicitHeight } = props;
+  
+  if (!data || !data[index]) return null;
+  
+  // Use explicit dimensions if passed, otherwise fallback to viewBox
+  const width = explicitWidth || (viewBox ? viewBox.width : 0);
+  const height = explicitHeight || (viewBox ? viewBox.height : 0);
+  
+  // Render only in the last column
+  if (index !== data.length - 1) return null;
+  
+  const dataLength = data.length;
+  const columnWidth = (dataLength > 1 && width > 0) ? width / (dataLength - 1) : 0;
+  
+  // Center horizontally in the last column
+  const xCenter = x - columnWidth / 2;
+
+  const currentItem = data[index];
+  const prevItem = data[index - 1];
+  if (!prevItem) return null;
+
+  const getTop = (item) => {
+    let sum = 0;
+    for(let i=0; i<=lvl; i++) sum += (item[`level${i}`] || 0);
+    return sum;
+  };
+  const getBottom = (item) => {
+    let sum = 0;
+    for(let i=0; i<lvl; i++) sum += (item[`level${i}`] || 0);
+    return sum;
+  };
+
+  try {
+    const vTopLast = getTop(currentItem);
+    const vBottomLast = getBottom(currentItem);
+    const vTopPrev = getTop(prevItem);
+    const vBottomPrev = getBottom(prevItem);
+
+    const avgHeightValue = ((vTopLast - vBottomLast) + (vTopPrev - vBottomPrev)) / 2;
+    const avgHeightPx = (avgHeightValue / 100) * height;
+
+    // Threshold: if segment is too narrow (e.g. < 8px), omit the label
+    if (avgHeightPx < 8) return null;
+
+    const vCenterLast = (vTopLast + vBottomLast) / 2;
+    const vCenterPrev = (vTopPrev + vBottomPrev) / 2;
+    const vCenterAvg = (vCenterLast + vCenterPrev) / 2;
+
+    // Convert value space to pixel space (Y is 0 at top)
+    const yPixel = height * (1 - vCenterAvg / 100);
+
+    const label = (labels && labels[`level${lvl}`]) ? labels[`level${lvl}`] : null;
+    if (!label) return null;
+
+    return (
+      <g transform={`translate(${xCenter}, ${yPixel})`}>
+        <foreignObject width="100" height="40" x="-50" y="-20">
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            height: '100%',
+            color: premium ? '#ffffff' : USI_THEME.colors.graphite
+          }}>
+            <USILabel label={label} textColor={premium ? '#ffffff' : null} />
+          </div>
+        </foreignObject>
+      </g>
+    );
+  } catch (err) {
+    return null;
+  }
+};
+
 const USIChart = ({ 
   data, 
   title, 
@@ -177,7 +280,7 @@ const USIChart = ({
       <ResponsiveContainer width="100%" height={title ? "90%" : "100%"}>
         <AreaChart
           data={data}
-          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+          margin={{ top: 10, right: 50, left: 50, bottom: 0 }}
         >
           <defs>
             {Object.keys(COLORS).map(key => (
@@ -196,22 +299,15 @@ const USIChart = ({
             dataKey="quarter" 
             axisLine={false} 
             tickLine={false} 
-            tick={{ 
-              fill: premium ? 'white' : USI_THEME.colors.graphite, 
-              fontSize: 12, 
-              fontFamily: 'Signika' 
-            }}
-            dy={10}
+            tick={<CustomXAxisTick dataLength={data.length} premium={premium} chartWidth={typeof width === 'number' ? width - 100 : 0} />}
           />
-          {!premium && (
-            <YAxis 
-              axisLine={false} 
-              tickLine={false} 
-              tick={{ fill: USI_THEME.colors.graphite, fontSize: 12, fontFamily: 'Signika' }}
-              tickFormatter={(val) => `${val}%`}
-              tick={<CustomYAxisTick />}
-            />
-          )}
+          <YAxis 
+            domain={[0, 100]}
+            axisLine={false} 
+            tickLine={false} 
+            tick={{ fill: premium ? 'rgba(255,255,255,0.7)' : USI_THEME.colors.graphite, fontSize: 10, fontFamily: 'Signika' }}
+            tickFormatter={(val) => `${val}%`}
+          />
           <Tooltip 
             contentStyle={{ 
               borderRadius: '8px', 
@@ -255,19 +351,17 @@ const USIChart = ({
               {premium && (
                 <LabelList 
                   dataKey={`level${lvl}`} 
-                  content={(props) => {
-                    const { x, y, index, value } = props;
-                    // Recharts LabelList passes index of the point
-                    if (index !== data.length - 1) return null;
-                    const label = LABELS[`level${lvl}`];
-                    return (
-                      <g transform={`translate(${x + 10}, ${y - 8})`}>
-                         <foreignObject width="60" height="30">
-                            <USILabel label={label} textColor="#ffffff" />
-                         </foreignObject>
-                      </g>
-                    );
-                  }}
+                  content={(labelProps) => (
+                    <CustomIndicatorLabel 
+                      {...labelProps}
+                      data={data} 
+                      lvl={lvl} 
+                      labels={LABELS} 
+                      premium={premium} 
+                      chartWidth={typeof width === 'number' ? width - 100 : 0}
+                      chartHeight={typeof height === 'number' ? height - 100 : 0}
+                    />
+                  )}
                 />
               )}
             </Area>
