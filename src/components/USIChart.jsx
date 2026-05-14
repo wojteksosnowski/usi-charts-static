@@ -1,7 +1,7 @@
 import React from 'react';
-import { 
-  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
-  Legend, LabelList 
+import {
+  AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer,
+  Legend, LabelList
 } from 'recharts';
 import { USI_THEME } from '../theme';
 
@@ -307,14 +307,6 @@ const USIChart = ({
             tickLine={false} 
             tick={{ fill: premium ? 'rgba(255,255,255,0.7)' : USI_THEME.colors.graphite, fontSize: 10, fontFamily: 'Signika' }}
             tickFormatter={(val) => `${val}%`}
-          />
-          <Tooltip 
-            contentStyle={{ 
-              borderRadius: '8px', 
-              border: 'none', 
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-              fontFamily: 'Signika'
-            }}
           />
           {!premium && (
             <Legend 
