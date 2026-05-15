@@ -132,8 +132,11 @@ const CustomYAxisTick = (props) => {
 };
 
 const CustomXAxisTick = (props) => {
-  const { x, y, payload, chartWidth, dataLength, premium } = props;
+  const { x, y, payload, chartWidth, dataLength, premium, index } = props;
   
+  // Skip the first label as requested
+  if (index === 0) return null;
+
   const axisWidth = chartWidth || props.width || 0;
   const columnWidth = (dataLength > 1 && axisWidth > 0) ? axisWidth / (dataLength - 1) : 0;
   
@@ -278,7 +281,7 @@ const USIChart = ({
         fontFamily: 'Signika' 
       }}>{title}</h3>}
       <ResponsiveContainer width="100%" height={title ? "90%" : "100%"}>
-        <AreaChart
+          <AreaChart
           data={data}
           margin={{ top: 10, right: 50, left: 50, bottom: 0 }}
         >
@@ -306,7 +309,7 @@ const USIChart = ({
             axisLine={false} 
             tickLine={false} 
             tick={{ fill: premium ? 'rgba(255,255,255,0.7)' : USI_THEME.colors.graphite, fontSize: 10, fontFamily: 'Signika' }}
-            tickFormatter={(val) => `${val}%`}
+            tickFormatter={(val) => `${Math.round(val)}%`}
           />
           {!premium && (
             <Legend 
@@ -338,7 +341,8 @@ const USIChart = ({
               fill={premium ? "transparent" : `url(#grad_level${lvl})`}
               name={LABELS[`level${lvl}`]}
               strokeWidth={premium ? 1.5 : 2}
-              isAnimationActive={!premium}
+              isAnimationActive={false}
+              activeDot={false}
             >
               {premium && (
                 <LabelList 

@@ -55,27 +55,6 @@ function App() {
         height={config.height}
         premium={true}
       />
-      <div style={{
-        marginTop: '10px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        fontFamily: 'Signika'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <label style={{ fontSize: '12px', color: USI_THEME.colors.graphite }}>Sigma:</label>
-          <input
-            type="range"
-            min="0.1"
-            max="2.0"
-            step="0.1"
-            value={sigma}
-            onChange={(e) => setSigma(parseFloat(e.target.value))}
-          />
-          <span style={{ fontWeight: 'bold' }}>{sigma}</span>
-        </div>
-        <ExportButton targetId="single-chart-export-target" fileName={`usi-${config.chartType.toLowerCase()}`} />
-      </div>
     </div>
   );
 }
