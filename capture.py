@@ -20,7 +20,7 @@ def get_chart(chart_type='Fasady', color_a='#f39200', color_b='#ffd200',
     if title:
         params['title'] = title
 
-    resp = requests.get('http://localhost:3001/chart', params=params)
+    resp = requests.get('http://127.0.0.1:3001/chart', params=params)
     resp.raise_for_status()
 
     with open(output, 'wb') as f:
