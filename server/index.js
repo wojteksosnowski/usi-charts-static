@@ -42,7 +42,7 @@ const getUsiZeroGroup = () => `
 
 const getUsiSvgDataUri = (isZero) => {
   const innerHtml = isZero ? getUsiZeroGroup() : getUsiStarGroup(0);
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 43 48" style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">${innerHtml}</svg>`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="43" height="48" viewBox="0 0 43 48" style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">${innerHtml}</svg>`;
   return `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
 }
 
@@ -105,16 +105,18 @@ app.get('/chart', async (request, reply) => {
     if (val > 2) {
       const midY = currentStack + val / 2;
       const data = [];
+      let symbolSize = [];
       
       if (lvl === 0) {
+        symbolSize = [14, 15.62];
         data.push({
           coord: [lastIdx, midY],
           symbolOffset: [-columnWidth / 2, 0]
         });
       } else {
-        const itemWidth = 14;
+        symbolSize = [12, 13.39];
         const gap = 2;
-        const step = itemWidth + gap;
+        const step = 12 + gap;
         for (let i = 0; i < lvl; i++) {
           const offset = -columnWidth / 2 + (i - (lvl - 1) / 2) * step;
           data.push({
@@ -126,7 +128,7 @@ app.get('/chart', async (request, reply) => {
 
       markPoint = {
         symbol: 'image://' + getUsiSvgDataUri(lvl === 0),
-        symbolSize: [14, 16],
+        symbolSize: symbolSize,
         data: data
       };
     }
