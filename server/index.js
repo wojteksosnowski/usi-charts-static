@@ -40,21 +40,9 @@ const getUsiZeroGroup = () => `
 </g>
 `;
 
-const getStarsSvgDataUri = (lvl) => {
-  let innerHtml = '';
-  let width = 0;
-  
-  if (lvl === 0) {
-    innerHtml = getUsiZeroGroup();
-    width = 43;
-  } else {
-    for (let i = 0; i < lvl; i++) {
-      innerHtml += getUsiStarGroup(i);
-    }
-    width = lvl * 43;
-  }
-  
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="48" viewBox="0 0 ${width} 48" style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">${innerHtml}</svg>`;
+const getUsiSvgDataUri = (isZero) => {
+  const innerHtml = isZero ? getUsiZeroGroup() : getUsiStarGroup(0);
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" viewBox="0 0 43 48" style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 2;">${innerHtml}</svg>`;
   return `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
 }
 
@@ -116,15 +104,30 @@ app.get('/chart', async (request, reply) => {
     let markPoint = undefined;
     if (val > 2) {
       const midY = currentStack + val / 2;
-      const itemWidth = 24 * (43 / 48);
-      const width = lvl === 0 ? itemWidth : lvl * itemWidth;
+      const data = [];
+      
+      if (lvl === 0) {
+        data.push({
+          coord: [lastIdx, midY],
+          symbolOffset: [-columnWidth / 2, 0]
+        });
+      } else {
+        const itemWidth = 14;
+        const gap = 2;
+        const step = itemWidth + gap;
+        for (let i = 0; i < lvl; i++) {
+          const offset = -columnWidth / 2 + (i - (lvl - 1) / 2) * step;
+          data.push({
+            coord: [lastIdx, midY],
+            symbolOffset: [offset, 0]
+          });
+        }
+      }
+
       markPoint = {
-        symbol: 'image://' + getStarsSvgDataUri(lvl),
-        symbolSize: [width, 24],
-        symbolOffset: [-width / 2 - 10, 0], // Shift them left so they don't clip on the right edge
-        data: [
-          { coord: [lastIdx, midY] }
-        ]
+        symbol: 'image://' + getUsiSvgDataUri(lvl === 0),
+        symbolSize: [14, 16],
+        data: data
       };
     }
     currentStack += val;
