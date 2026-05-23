@@ -9,10 +9,7 @@
   "dependencies": {
     "@resvg/resvg-js": "^2.6.2",
     "echarts": "^6.1.0",
-    "fastify": "^5.8.5",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
-    "recharts": "^3.8.1"
+    "fastify": "^5.8.5"
   },
   "devDependencies": {
     "tsx": "^4.22.3"

@@ -54,19 +54,25 @@ app.get('/chart', async (request, reply) => {
     width = '1200',
     height = '400',
     sigma = '0.8',
-    title = ''
+    title = '',
+    startYear = '2022',
+    startQuarter = '1',
+    quartersCount = '12'
   } = request.query;
 
   const numericWidth = parseInt(width);
   const numericHeight = parseInt(height);
   const numericSigma = parseFloat(sigma);
+  const numericStartYear = parseInt(startYear);
+  const numericStartQuarter = parseInt(startQuarter);
+  const numericQuartersCount = parseInt(quartersCount);
 
   // 1. Prepare data
   const enrichedData = krakowData.map((item, idx) => ({
     ...item,
     Q: item.Q !== undefined ? item.Q : (idx % 12)
   }));
-  const timeline = generatePremiumTimeline(2022, 1, 12);
+  const timeline = generatePremiumTimeline(numericStartYear, numericStartQuarter, numericQuartersCount);
   const chartData = aggregateGaussian(enrichedData, chartType, numericSigma, timeline);
 
   const xAxisData = chartData.map(d => d.quarter);
